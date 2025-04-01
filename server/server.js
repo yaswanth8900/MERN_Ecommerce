@@ -31,9 +31,20 @@ mongoose.connect(URL, {
 const app = express();
 
 
+const allowedOrigins = [
+  "http://localhost:5173", // Local development
+  "", // Deployed frontend
+];
+
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true); // Allow the request
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     methods: ["GET", "POST", "DELETE", "PUT"],
     allowedHeaders: [
       "Content-Type",
