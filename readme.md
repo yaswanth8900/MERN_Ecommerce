@@ -34,7 +34,7 @@ This e-commerce website is built using [list technologies, e.g., React, Node.js,
 To install and run the application locally, follow these steps:
 
 1. Clone the repository:
-   git clone https://github.com/yourusername/ecommerce-website.git
+   git clone https://github.com/yaswanth8900/MERN_Ecommerce.git
 
 2. Install the required dependencies:
     npm install
