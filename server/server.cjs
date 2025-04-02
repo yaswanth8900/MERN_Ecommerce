@@ -30,11 +30,23 @@ mongoose.connect(URL, {
 
 const app = express();
 
+const cors = require('cors');
 
 const allowedOrigins = [
-  "http://localhost:5173", // Local development
-  "https://e-commerceyash.netlify.app", // Deployed frontend
+  'http://localhost:5173',
+  'https://e-commerceyash.netlify.app'
 ];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (allowedOrigins.includes(origin) || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
+}));
 
 app.use(
   cors({
