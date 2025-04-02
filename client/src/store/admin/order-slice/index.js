@@ -5,12 +5,15 @@ const initialState = {
   orderList: [],
   orderDetails: null,
 };
+const BASE_URL = process.env.NODE_ENV === "production"
+  ? "https://mern-ecommerce-osk3.onrender.com"
+  : "http://localhost:5000";
 
 export const getAllOrdersForAdmin = createAsyncThunk(
   "/order/getAllOrdersForAdmin",
   async () => {
     const response = await axios.get(
-      `http://localhost:5000/api/admin/orders/get`
+      `${BASE_URL}/api/admin/orders/get`
     );
 
     return response.data;
@@ -21,7 +24,7 @@ export const getOrderDetailsForAdmin = createAsyncThunk(
   "/order/getOrderDetailsForAdmin",
   async (id) => {
     const response = await axios.get(
-      `http://localhost:5000/api/admin/orders/details/${id}`
+      `${BASE_URL}/api/admin/orders/details/${id}`
     );
 
     return response.data;
@@ -32,7 +35,7 @@ export const updateOrderStatus = createAsyncThunk(
   "/order/updateOrderStatus",
   async ({ id, orderStatus }) => {
     const response = await axios.put(
-      `http://localhost:5000/api/admin/orders/update/${id}`,
+      `${BASE_URL}/api/admin/orders/update/${id}`,
       {
         orderStatus,
       }

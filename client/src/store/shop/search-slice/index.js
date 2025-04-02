@@ -5,12 +5,15 @@ const initialState = {
   isLoading: false,
   searchResults: [],
 };
+const BASE_URL = process.env.NODE_ENV === "production"
+  ? "https://mern-ecommerce-osk3.onrender.com"
+  : "http://localhost:5000";
 
 export const getSearchResults = createAsyncThunk(
   "/order/getSearchResults",
   async (keyword) => {
     const response = await axios.get(
-      `http://localhost:5000/api/shop/search/${keyword}`
+      `${BASE_URL}/api/shop/search/${keyword}`
     );
 
     return response.data;

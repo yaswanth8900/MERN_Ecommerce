@@ -6,6 +6,9 @@ const initialState = {
   productList: [],
   productDetails: null,
 };
+const BASE_URL = process.env.NODE_ENV === "production"
+  ? "https://mern-ecommerce-osk3.onrender.com"
+  : "http://localhost:5000";
 
 export const fetchAllFilteredProducts = createAsyncThunk(
   "/products/fetchAllProducts",
@@ -18,7 +21,7 @@ export const fetchAllFilteredProducts = createAsyncThunk(
     });
 
     const result = await axios.get(
-      `http://localhost:5000/api/shop/products/get?${query}`
+      `${BASE_URL}/api/shop/products/get?${query}`
     );
 
     console.log(result);
@@ -31,7 +34,7 @@ export const fetchProductDetails = createAsyncThunk(
   "/products/fetchProductDetails",
   async (id) => {
     const result = await axios.get(
-      `http://localhost:5000/api/shop/products/get/${id}`
+      `${BASE_URL}/api/shop/products/get/${id}`
     );
 
     return result?.data;

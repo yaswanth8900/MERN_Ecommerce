@@ -6,6 +6,11 @@ const initialState = {
   isLoading: true,
   user: null,
 };
+const BASE_URL = process.env.NODE_ENV === "production"
+  ? "https://mern-ecommerce-osk3.onrender.com"
+  : "http://localhost:5000";
+
+
 
 export const registerUser = createAsyncThunk(
   "/auth/register",
@@ -13,7 +18,7 @@ export const registerUser = createAsyncThunk(
   async (formData) => {
     console.log(formData);
     const response = await axios.post(
-      "http://localhost:5000/api/auth/register",
+      `${BASE_URL}/api/auth/register` ,
       formData,
       {
         withCredentials: true,
@@ -29,7 +34,7 @@ export const loginUser = createAsyncThunk(
 
   async (formData) => {
     const response = await axios.post(
-      "http://localhost:5000/api/auth/login",
+      `${BASE_URL}/api/auth/login`,
       formData,
       {
         withCredentials: true,
@@ -45,7 +50,7 @@ export const logoutUser = createAsyncThunk(
 
   async () => {
     const response = await axios.post(
-      "http://localhost:5000/api/auth/logout",
+      `${BASE_URL}/api/auth/logout`,
       {},
       {
         withCredentials: true,
@@ -61,7 +66,7 @@ export const checkAuth = createAsyncThunk(
 
   async () => {
     const response = await axios.get(
-      "http://localhost:5000/api/auth/check-auth",
+      `${BASE_URL}/api/auth/check-auth`,
       {
         withCredentials: true,
         headers: {

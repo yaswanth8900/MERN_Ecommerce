@@ -33,7 +33,7 @@ const app = express();
 
 const allowedOrigins = [
   "http://localhost:5173", // Local development
-  "", // Deployed frontend
+  "https://e-commerceyash.netlify.app", // Deployed frontend
 ];
 
 app.use(

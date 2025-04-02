@@ -5,12 +5,15 @@ const initialState = {
   isLoading: false,
   productList: [],
 };
+const BASE_URL = process.env.NODE_ENV === "production"
+  ? "https://mern-ecommerce-osk3.onrender.com"
+  : "http://localhost:5000";
 
 export const addNewProduct = createAsyncThunk(
   "/products/addnewproduct",
   async (formData) => {
     const result = await axios.post(
-      "http://localhost:5000/api/admin/products/add",
+      `${BASE_URL}/api/admin/products/add`,
       formData,
       {
         headers: {
@@ -27,7 +30,7 @@ export const fetchAllProducts = createAsyncThunk(
   "/products/fetchAllProducts",
   async () => {
     const result = await axios.get(
-      "http://localhost:5000/api/admin/products/get"
+      `${BASE_URL}/api/admin/products/get`
     );
 
     return result?.data;
@@ -38,7 +41,7 @@ export const editProduct = createAsyncThunk(
   "/products/editProduct",
   async ({ id, formData }) => {
     const result = await axios.put(
-      `http://localhost:5000/api/admin/products/edit/${id}`,
+      `${BASE_URL}/api/admin/products/edit/${id}`,
       formData,
       {
         headers: {
@@ -55,7 +58,7 @@ export const deleteProduct = createAsyncThunk(
   "/products/deleteProduct",
   async (id) => {
     const result = await axios.delete(
-      `http://localhost:5000/api/admin/products/delete/${id}`
+      `${BASE_URL}/api/admin/products/delete/${id}`
     );
 
     return result?.data;
